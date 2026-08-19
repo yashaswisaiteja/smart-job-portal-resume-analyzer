@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="text-center mb-4">
+
+    <div class="alert alert-success">
+        <h4 class="mb-1">✅ Application Submitted Successfully!</h4>
+        <p class="mb-0">
+            Your application for <strong>{{ job.title }}</strong>
+            has been submitted.
+        </p>
+    </div>
+
+    <h2 class="mt-4">Resume Analysis</h2>
+
+    <div class="score">
+        {{ score }}%
+    </div>
+
+    <p>
+        Match score for {{ job.title }}
+    </p>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="card p-3 h-100">
+
+            <h4>Matched Skills</h4>
+
+            {% for s in matched %}
+
+                <span class="badge bg-success skill">
+                    {{ s }}
+                </span>
+
+            {% else %}
+
+                <p>No matched skills.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-6">
+
+        <div class="card p-3 h-100">
+
+            <h4>Missing Skills</h4>
+
+            {% for s in missing %}
+
+                <span class="badge bg-danger skill">
+                    {{ s }}
+                </span>
+
+            {% else %}
+
+                <p>
+                    Great! No listed skills are missing.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="mt-4">
+
+    <a
+        class="btn btn-primary"
+        href="{{ url_for('static', filename='uploads/' + resume_filename) }}"
+        target="_blank"
+    >
+        📄 View Uploaded Resume
+    </a>
+
+
+    <a
+        class="btn btn-dark ms-2"
+        href="{{ url_for('dashboard') }}"
+    >
+        Go to Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

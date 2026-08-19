@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-body p-4">
+
+        <h2>{{ job.title }}</h2>
+
+        <h5>
+            {{ job.company }} · {{ job.location }}
+        </h5>
+
+        <hr>
+
+        <p>
+            {{ job.description }}
+        </p>
+
+        <p>
+            <b>Required skills:</b>
+            {{ job.required_skills }}
+        </p>
+
+
+        {% if already_applied %}
+
+            <div class="alert alert-success mt-3">
+                <h5 class="mb-1">✅ Already Applied</h5>
+
+                <p class="mb-0">
+                    You have already applied for this job.
+                </p>
+            </div>
+
+            <a
+                class="btn btn-dark"
+                href="{{ url_for('dashboard') }}"
+            >
+                Go to Dashboard
+            </a>
+
+        {% else %}
+
+            <a
+                class="btn btn-success"
+                href="{{ url_for('apply', job_id=job.id) }}"
+            >
+                Apply & Analyze Resume
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

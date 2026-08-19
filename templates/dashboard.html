@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Welcome, {{ session.get('name') }}</h2>
+
+<p class="text-muted">
+    Your applications and resume match results.
+</p>
+
+
+<div class="table-responsive">
+
+    <table class="table table-bordered align-middle">
+
+        <thead>
+            <tr>
+                <th>Job</th>
+                <th>Company</th>
+                <th>Status</th>
+                <th>Score</th>
+                <th>Matched</th>
+                <th>Missing</th>
+                <th>Resume</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+            {% for a in applications %}
+
+            <tr>
+
+                <td>
+                    {{ a.title if a.title else a.job_id }}
+                </td>
+
+
+                <td>
+                    {{ a.company if a.company else '' }}
+                </td>
+
+
+                <td>
+                    <span class="badge bg-success">
+                        Applied
+                    </span>
+                </td>
+
+
+                <td>
+                    <b>{{ a.match_score }}%</b>
+                </td>
+
+
+                <td>
+                    {{ a.matched_skills }}
+                </td>
+
+
+                <td>
+                    {{ a.missing_skills }}
+                </td>
+
+
+                <td>
+
+                    {% if a.resume_filename %}
+
+                    <a
+                        class="btn btn-sm btn-primary"
+                        href="{{ url_for('static', filename='uploads/' + a.resume_filename) }}"
+                        target="_blank"
+                    >
+                        📄 View Resume
+                    </a>
+
+                    {% else %}
+
+                    <span class="text-muted">
+                        Not available
+                    </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <td>
+                    {{ a.applied_at }}
+                </td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="8" class="text-center">
+
+                    No applications yet.
+
+                    <a href="{{ url_for('index') }}">
+                        Browse jobs
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

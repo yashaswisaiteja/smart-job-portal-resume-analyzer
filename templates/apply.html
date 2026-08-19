@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block content %}
+<div class="form-card"><h2>Apply: {{ job.title }}</h2>
+<p>Upload a PDF or TXT resume. The app extracts skills and calculates a match score.</p>
+<form method="post" enctype="multipart/form-data">
+<input class="form-control mb-3" type="file" name="resume" accept=".pdf,.txt" required>
+<button class="btn btn-success w-100">Analyze & Apply</button></form></div>{% endblock %}
