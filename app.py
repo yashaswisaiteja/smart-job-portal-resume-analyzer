@@ -40,29 +40,35 @@ os.makedirs(
 # DATABASE CONFIGURATION
 # =========================================================
 
+#DB_CONFIG = {
+    #"host": os.getenv(
+    #    "DB_HOST",
+     #   "localhost"
+    #),
+
+#    "user": os.getenv(
+ #       "DB_USER",
+  #      "root"
+   # ),
+
+    #"password": os.getenv(
+     #   "DB_PASSWORD",
+      #  ""
+    #),
+    #"port": int(os.getenv("DB_PORT", "3306")),
+
+    #"database": os.getenv(
+     #   "DB_NAME",
+      #  "job_portal"
+    #)
+#}
 DB_CONFIG = {
-    "host": os.getenv(
-        "DB_HOST",
-        "localhost"
-    ),
-
-    "user": os.getenv(
-        "DB_USER",
-        "root"
-    ),
-
-    "password": os.getenv(
-        "DB_PASSWORD",
-        ""
-    ),
-    "port": int(os.getenv("DB_PORT", "3306")),
-
-    "database": os.getenv(
-        "DB_NAME",
-        "job_portal"
-    )
+    "host": os.getenv("DB_HOST") or "localhost",
+    "port": int(os.getenv("DB_PORT") or "3306"),
+    "user": os.getenv("DB_USER") or "root",
+    "password": os.getenv("DB_PASSWORD") or "",
+    "database": os.getenv("DB_NAME") or "job_portal"
 }
-
 
 def get_db():
     return mysql.connector.connect(
